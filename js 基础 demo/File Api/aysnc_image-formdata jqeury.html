@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+   <script type="text/javascript" src="/asd/jquery-3.2.1.js"></script>
+	<script type="text/javascript">
+
+	
+$(function(){
+	$('#asds').change(function(e){
+		 e.preventDefault();
+		//创建FormData对象
+       
+       var fileObj = $("#asds")[0]; // js 获取文件对象
+           
+        //  将DOM对象传进去 能将所有name字段append
+        // 想要动态添加使用append方法
+        var formFile = new FormData($("#asds")[0]);
+        
+        console.log(formFile)
+      	var url = '/asd/index.php/Home/index/upload';
+      	$.ajax({
+      		 url: '/asd/index.php/Home/index/upload' ,  
+          type: 'POST',  
+          data: formFile,  
+          // async: false,  
+          cache: false,  
+           /**
+            *必须false才会自动加上正确的Content-Type
+            */
+            contentType: false,
+            /**
+             * 必须false才会避开jQuery对 formdata 的默认处理
+            * XMLHttpRequest会对 formdata 进行正确的处理
+             */
+          processData: false,  //不进行序列化处理。
+    success : function(data) {
+        //上传成功
+                alert(data);   
+                $('img').attr('src',data);
+    },
+    error : function(data) {
+         alert(data); 
+    }
+                });
+    
+	})
+})
+	function doUpload() {  
+     var formData = new FormData($( "#uploadForm" )[0]);  
+     $.ajax({  
+          url: '/asd/index.php/Home/index/upload' ,  
+          type: 'POST',  
+          data: formData,  
+          async: false,  
+          cache: false,  
+          contentType: false,  
+          processData: false,  
+          success: function (returndata) {  
+              // alert(returndata);  
+            
+          },  
+          error: function (returndata) {  
+              alert(returndata);  
+          }  
+     });  
+}  	
+	</script>
+
+</head>
+<body>
+<!-- <form  method="post" action="/asd/index.php/Home/index/upload"  enctype="multipart/form-data" > -->
+	<form  id="asds"  >
+<input type="text" name="name"  />
+<input type="file" name="photo" id="inputfile"/>
+<input type="submit" value="提交" >
+<img src="">
+</form>
+
+<form id= "uploadForm">  
+      <p >指定文件名： <input type="text" name="filename" value= ""/></p >  
+      <p >上传文件： <input type="file" name="file"/></ p>  
+      <input type="button" value="上传" onclick="doUpload()" />  
+</form>  
+</body>
+</html>

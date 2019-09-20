@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<link href='https://fonts.loli.net/css?family=Open+Sans' rel='stylesheet'>
+
+</head>
+<body>
+
+<script>
+    // https://fetch.spec.whatwg.org/#cors-safelisted-method
+    // https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch
+
+
+    // Fetch 与 CORS 的一个有趣的特性是，可以基于  HTTP cookies 和 HTTP 认证信息发送身份凭证。一般而言，对于跨域 XMLHttpRequest 或 Fetch 请求，浏览器不会发送身份凭证信息。如果要发送凭证信息，需要设置 XMLHttpRequest 的某个特殊标志位
+
+    // // get
+    // fetch('http://httpbin.org/get?a=1').then((res)=>{
+    //     // console.log(Object.getOwnPropertyNames(res))  // 方法在继承的对象里
+    //     // console.log(Object.keys(res))
+    //     console.log((res))
+    //     console.log((res.status))
+    //     return res.json()
+    // }).then((rr)=>{
+    //     console.log(rr)
+    // })
+
+    // post
+    // fetch('http://httpbin.org/post',{
+    //     // method: 'put',
+    //     method: 'post',
+    //     // body: '{"a":1}',
+    //     body: JSON.stringify({"a":1}), // data can be `string` or {object}! 传过去的是一个string 跟axios差不多的道理
+    //     headers: new Headers({
+    //         'Content-Type': 'application/json',
+    //         'X-Test-Cors': '1111'
+    //     })
+    // }).then((res)=>{
+    //     // console.log(Object.getOwnPropertyNames(res))  // 方法在继承的对象里
+    //     // console.log(Object.keys(res))
+    //     // console.log((res.json()))
+    //     console.log((res.status))
+    //     return res.json()
+    // }).then((rr)=>{
+    //     console.log(rr, 111)
+    // })
+
+    // 请求发送 会拿到数据，但是有跨越被浏览器忽略了 预检请求的
+    fetch('http://127.0.0.1:8888', {
+        method: 'put',
+        credentials: 'include',
+        // body: JSON.stringify({a :'test'}),
+        headers:  new Headers({
+            // 'Cookies': 'a=1'
+            'Content-Type': 'application/json', // 设置 Content-Type 为 text/plain multipart/form-data application/x-www-form-urlencoded 之外的值
+            // 'X-Test-Cors': '1111' 
+        })
+    }).then(response => {
+        console.log(response)
+        return response.json()
+    }).then(mjson => {
+        console.log(mjson);
+    })
+
+    // 简单请求
+    // fetch('http://127.0.0.1:8888', {
+    //     method: 'post',
+    //     body: JSON.stringify({test1 :'test'}),
+    //     headers:  new Headers({
+    //         'Content-Type': 'text/plain',
+    //     })
+    // }).then(res => {
+    //     return res.json()
+    // }).then(response => {
+    //     console.log(response);
+    // })
+</script>
+</body>
+</html>

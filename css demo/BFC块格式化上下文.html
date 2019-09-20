@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+  body {
+        width: 300px;
+        position: relative;
+    }
+    .aside {
+        width: 100px;
+        height: 150px;
+        float: left;
+        background: #f66;
+    }
+    .main { overflow: hidden;
+        height: 200px;
+        background: #fcc;
+    }
+    .box {
+    background-color: rgb(224, 206, 247);
+    border: 1px solid rebeccapurple;
+    /* overflow: auto; */
+}
+
+.float {
+    float: left;
+    width: 200px;
+    height: 150px;
+    background-color: white;
+    border:1px solid black;
+    padding: 10px;
+}   
+.clear{
+    clear: both;
+}
+
+
+   </style>
+ <body>
+    <div class="aside"></div>
+    <div class="main"></div>
+
+    <div class="box">
+        <div class="float">I am a floated box!</div>
+        
+        <p>I am content inside the container.</p>
+        <div class="clear"></div>
+    </div>
+    <style>
+    .pm{
+        width: 100px;
+        height: 100px;
+        background: red;
+        margin: 20px;
+    }
+    .cm{
+        width: 100px;
+        height: 100px;
+        background: blue;
+        margin: 20px;
+        overflow: auto;
+    }
+    </style>     
+    <div class="pm">
+    </div>
+    <div class="cm"></div>
+</body>
+</html>

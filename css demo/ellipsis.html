@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>多行文本实现超出...</title>
+<style type="text/css">
+    .twoLine {
+        width: 100px;
+        height: 100px;
+        border: 1px solid red;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp:2; /*第三行显示 ...*/
+        -webkit-box-orient: vertical;
+    }
+    .oneLine {
+    width: 200px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+</style>
+</head>
+
+<body>
+<div class="twoLine">测试文本测试文本测试文本测试文本本测试文本测试文本测试文</div>
+</body>
+</html>

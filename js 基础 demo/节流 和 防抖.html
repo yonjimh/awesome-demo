@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body style="color:red;height: 1800px;">
+	<script src="https://cdn.bootcss.com/lodash.js/4.17.10/lodash.js"></script>
+	<script type="text/javascript">
+// 节流 和 防抖
+// window.onmousemove = _.throttle(function(){console.log(111)}, 500);
+// window.addEventListener('mousemove', _.debounce(function(){console.log(999)}, 500, { trailing:  false}), false);
+
+
+window.addEventListener('mousemove', _.throttle(function(){console.log('throttle')}, 500, false));
+window.addEventListener('mousemove', _.debounce(function(){console.log('maxWait debounce')}, 500, {maxWait: 500, leading: true, trailing: true}), false);
+window.addEventListener('mousemove', _.debounce(function(){console.log('debounce')}, 500), false);
+
+// function throttle(method, context) {
+// clearTimeout(method.tId);
+// method.tId= setTimeout(function(){
+// method.call(context);
+// }, 100);
+// }
+// function resizeDiv(){
+// console.log('resizeDiv');
+
+// }
+// window.onscroll = function(){
+// 	// console.log(111);
+	
+// throttle(resizeDiv);
+// };
+	</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="http://afarkas.github.io/lazysizes/lazysizes.min.js"></script>
+<body>
+    <div style="height: 1800px;"></div>
+    <div style="position: relative;">
+        <img src="data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs="
+        data-src="https://api.ooopn.com/image/bing/api.php?v=2"
+        width="1024" height="768" class="lazyload" />
+    </div>
+ 
+    <script>
+       console.log( document.getElementsByTagName('img')[0].offsetParent);
+    </script>
+</body>
+</html>

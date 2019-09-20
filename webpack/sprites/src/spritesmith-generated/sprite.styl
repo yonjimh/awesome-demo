@@ -1,0 +1,118 @@
+/*
+Stylus variables are information about icon's compiled state, stored under its original file name
+
+.icon-home {
+  width: $icon_home_width;
+}
+
+The large array-like variables contain all information about a single icon
+$icon_home = x y offset_x offset_y width height total_width total_height image_path;
+
+At the bottom of this section, we provide information about the spritesheet itself
+$spritesheet = width height image $spritesheet_sprites;
+*/
+$shime1_name = 'shime1';
+$shime1_x = 0px;
+$shime1_y = 0px;
+$shime1_offset_x = 0px;
+$shime1_offset_y = 0px;
+$shime1_width = 128px;
+$shime1_height = 128px;
+$shime1_total_width = 256px;
+$shime1_total_height = 256px;
+$shime1_image = '~sprite.png';
+$shime1 = 0px 0px 0px 0px 128px 128px 256px 256px '~sprite.png' 'shime1';
+$shime2_name = 'shime2';
+$shime2_x = 128px;
+$shime2_y = 0px;
+$shime2_offset_x = -128px;
+$shime2_offset_y = 0px;
+$shime2_width = 128px;
+$shime2_height = 128px;
+$shime2_total_width = 256px;
+$shime2_total_height = 256px;
+$shime2_image = '~sprite.png';
+$shime2 = 128px 0px -128px 0px 128px 128px 256px 256px '~sprite.png' 'shime2';
+$shime3_name = 'shime3';
+$shime3_x = 0px;
+$shime3_y = 128px;
+$shime3_offset_x = 0px;
+$shime3_offset_y = -128px;
+$shime3_width = 128px;
+$shime3_height = 128px;
+$shime3_total_width = 256px;
+$shime3_total_height = 256px;
+$shime3_image = '~sprite.png';
+$shime3 = 0px 128px 0px -128px 128px 128px 256px 256px '~sprite.png' 'shime3';
+$spritesheet_width = 256px;
+$spritesheet_height = 256px;
+$spritesheet_image = '~sprite.png';
+$spritesheet_sprites = $shime1 $shime2 $shime3;
+$spritesheet = 256px 256px '~sprite.png' $spritesheet_sprites;
+
+/*
+The provided mixins are intended to be used with the array-like variables
+
+.icon-home {
+  spriteWidth($icon_home)
+}
+
+.icon-email {
+  sprite($icon_email)
+}
+
+Example usage in HTML:
+
+`display: block` sprite:
+<div class="icon-home"></div>
+
+To change `display` (e.g. `display: inline-block;`), we suggest using a common CSS class:
+
+// CSS
+.icon {
+  display: inline-block;
+}
+
+// HTML
+<i class="icon icon-home"></i>
+*/
+spriteWidth($sprite) {
+  width: $sprite[4];
+}
+
+spriteHeight($sprite) {
+  height: $sprite[5];
+}
+
+spritePosition($sprite) {
+  background-position: $sprite[2] $sprite[3];
+}
+
+spriteImage($sprite) {
+  background-image: url($sprite[8]);
+}
+
+sprite($sprite) {
+  spriteImage($sprite)
+  spritePosition($sprite)
+  spriteWidth($sprite)
+  spriteHeight($sprite)
+}
+
+/*
+The `sprites` mixin generates identical output to the CSS template
+  but can be overridden inside of Stylus
+
+This must be run when you have at least 2 sprites.
+  If run with a single sprite, then there will be reference errors.
+
+sprites($spritesheet_sprites);
+*/
+sprites($sprites) {
+  for $sprite in $sprites {
+    $sprite_name = $sprite[9];
+    .{$sprite_name} {
+      sprite($sprite);
+    }
+  }
+}

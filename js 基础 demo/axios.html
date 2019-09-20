@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+
+<body>
+  <form method="post" action="">
+    <input name="name" />
+    <button>11111</button>
+  </form>
+</body>
+<script>
+  // 为给定 ID 的 user 创建请求
+  // axios.get('http://127.0.0.1:8081/1.txt', {
+  //     a: 1
+  //   })
+  //   .then(function (response) {
+  //     console.log(response);
+  //   })
+  //   .catch(function (error) {
+  //     console.log(error);
+  //   });
+  // axios.request({
+  //   u
+  // })
+  // $.ajax({
+  //   method: 'post',
+  //   url: 'http://127.0.0.1:8081/1.txt',
+  //   data: {
+  //     a: 1,
+  //     b: 2,
+  //     c: 3
+  //   }
+  // })
+  let param = new URLSearchParams()
+  param.append('username', 'admin')
+  param.append('pwd', 'admin')
+  axios({
+    method: 'post',
+    url: '/api/lockServer/search',
+    data: param
+  })
+  axios({
+    method: 'post',
+    url: 'http://httpbin.org/post',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    params: {
+      firstName: '1111',
+      lastName: 'Flint111111stone'
+    },
+    data: param
+  });
+  // 可选地，上面的请求可以这样做
+  // axios.get('/user', {
+  //     params: {
+  //       ID: 12345
+  //     }
+  //   })
+  //   .then(function (response) {
+  //     console.log(response);
+  //   })
+  //   .catch(function (error) {
+  //     console.log(error);
+  //   });
+</script>
+
+</html>

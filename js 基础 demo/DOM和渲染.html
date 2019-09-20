@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>dom异步</title>
+</head>
+<script>
+    for(var i = 0;i<1000000000;i++);
+</script>
+<body>
+<div id="ds" style="height: 0;">默认文本</div>
+<script>
+    console.log(ds);
+    
+ds.onclick = function(){
+    this.innerHTML = "往div里添加的新文本";//更改一个节点
+    console.log(ds.style);
+    
+    document.body.appendChild(document.createElement("input"));//插入一个节点
+    for(var i = 0;i<10000000000;i++);
+}
+
+// DOM树的修改是同步的(js可以立即获取元素)，渲染到屏幕上是异步的(不一定即时看到)
+// DOM元素本身修改当然是同步的。而DOM修改造成重绘与重排，当然是异步的，毕竟ui线程与js线程是互斥的
+</script>
+</body>
+</html>

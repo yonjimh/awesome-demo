@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    header,
+    footer,
+    main {
+        display: block;
+
+    }
+
+    header {
+        position: fixed;
+        height: 50px;
+        left: 0;
+        right: 0;
+        top: 0;
+    }
+
+    footer {
+        position: absolute;
+        height: 34px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+    main {
+
+        /* main绝对定位，进行内部滚动 */
+        position: absolute;
+        top: 50px;
+        bottom: 34px;
+        /* 使之可以滚动 */
+        overflow-y: scroll;
+        /* 增加该属性，可以增加弹性 */
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* main .content {
+        height: 2000px;
+    } */
+</style>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+
+<body class="layout-fixed">
+
+   <body class="layout-fixed">
+    <!-- fixed定位的头部 -->
+    <header>
+        
+    </header>
+    
+    <!-- 可以滚动的区域 -->
+    <main>
+        <!-- 内容在这里... -->
+    </main>
+    
+    <!-- fixed定位的底部 -->
+    <footer>
+        <input type="text" placeholder="Footer..."/>
+        <button class="submit">提交</button>
+    </footer>
+</body>
+<!-- 参考地址 https://efe.baidu.com/blog/mobile-fixed-layout/ -->
+    <script>
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    #app1 {
+        width: 100px;
+        height: 100px;
+        background: red;
+    }
+
+    #app2 {
+        width: 100px;
+        height: 100px;
+        background: blue;
+    }
+</style>
+<script src="https://cdn.bootcss.com/fastclick/1.0.6/fastclick.js"></script>
+
+<body>
+    <div id="app1">
+        <div id='app2'>
+        </div>
+    </div>
+    <script>
+        if ('addEventListener' in document) {
+            document.addEventListener('DOMContentLoaded', function () {
+                FastClick.attach(document.body);
+            }, false);
+        }
+        // 你真的了解FastClick吗？ https://www.cnblogs.com/ylweb/p/10549040.html
+        document.getElementById('app1').addEventListener('touchend', function () {
+            console.log('app1 touchend')
+        }, false)
+      
+        // document.getElementById('app2').addEventListener('touchend', function (e) {
+        //     console.log('app2 touchend')
+        //     this.style.display = 'none'
+        //     e.stopPropagation()
+        // }, false)
+
+        document.getElementById('app1').addEventListener('click', function () {
+            console.log('app1 click')
+        }, false)
+        document.getElementById('app2').addEventListener('click', function (e) {
+            console.log('app2 click')
+            this.style.display = 'none'
+            e.stopPropagation()
+        }, false)
+    </script>
+</body>
+
+</html>

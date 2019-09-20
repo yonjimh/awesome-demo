@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // new Promise(function(resolve, reject) {
+    //   setTimeout(() => {
+    //     reject();
+    //     return;
+    //   }, 2000);
+    // })
+    //   .catch(() => {
+    //     console.log('oh no');
+    //   })
+    //   .then(() => {
+    //     console.log('carry on');
+    //   })
+    //   .catch(err => {
+    //     console.log('oh no  111', err);
+    //   }).then(() => {
+    //     console.log('carry on1');
+    //   })
+
+
+
+
+    // var p11 = new Promise(function (resolve, reject) {
+    //   // 这样会报一个未捕获的异常 不过3s之后
+    //   setTimeout(() => reject(new Error('fail')), 3000)
+    // })
+
+    // var p21 = new Promise(function (resolve, reject) {
+    //   setTimeout(() => resolve(p11), 1000)
+    // })
+
+    // p21
+    //   .then(result => console.log(result))
+    //   .catch(error => console.log(error))
+
+    // 将上面的时间换一下
+    // var p1 = new Promise(function (resolve, reject) {
+    //   // 这样会报一个未捕获的异常 不过3s之后
+    //   setTimeout(() => reject(new Error('fail')), 1000)
+    // })
+
+    // var p2 = new Promise(function (resolve, reject) {
+    //   setTimeout(() => resolve(p1), 3000)
+    // })
+
+    // p2
+    //   .then(result => console.log(result))
+    //   .catch(error => console.log(error))
+
+    // const p1 = new Promise(function (resolve, reject) {
+    //   resolve(1111)
+    //   reject(new Error('fail'))
+    // })
+
+    // const p2 = new Promise(function (resolve, reject) {
+    //   resolve(p1)
+    // })
+    // p1.then(error => {
+    //   // console.log(error)
+    //   p1.then(() => {
+    //     console.log(111)
+    //     p1.then(() => {
+    //       console.log(111)
+    //     }).catch(error => console.log(error))
+    //   }).catch(error => console.log(error))
+    // })
+
+
+    // p2
+    //   .then(result => console.log(result))
+    //   .catch(error => console.log(error))
+
+
+
+
+    // then()
+    var testP = new Promise(function (resolve, reject) {
+      setTimeout(() => {
+        resolve('123');
+        return;
+      }, 2000);
+    })
+
+    testP.then((a) => {
+      console.log(a); // 123
+      // 什么都不返回
+    }).then((a) => {
+      console.log(a); // 233
+    })
+
+    testP.then((a) => {
+      console.log(a);
+      return '233' // 返回一个非Promise对象
+    }).then((a) => {
+      console.log(a); // 233
+    })
+
+    testP.then((a) => {
+      console.log(a);
+      return Promise.resolve('233') // 返回Promise对象 会等待该Promise对象的状态发生变化
+    }).then((a) => {
+      console.log(a); // 233
+    })
+
+    new Promise(function (resolve, reject) {
+      setTimeout(() => {
+        resolve('123');
+        return;
+      }, 2000);
+    }).then(() => {
+      console.log('then')
+    }).finally(() => {
+      console.log('finally')
+    }).then(() => {
+      console.log('finally then')
+    })
+    Promise.reject(3).finally(() => {
+      return Promise.reject(233)
+    }).catch((err) => {
+      console.log('finally catch')
+      console.log(err)
+    }).then(() => {
+      console.log('finally then')
+    })
+
+    !(async function () {
+        var a = (new Promise(function (resolve) {
+            setTimeout(() => {
+              resolve('234')
+            }, 1000)
+          }
+        ))
+      await a
+      console.log(111)
+    })()
+  </script>
+</body>
+
+</html>

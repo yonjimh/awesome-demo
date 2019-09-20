@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 40px;
+  background-color: #fff;
+  color: #444;
+  font: 1.4em Arial, sans-serif;
+}
+
+.outer {
+ background-color: #ccc;
+  margin: 0 0 40px 0;
+}
+
+p {
+  padding: 0;
+  margin: 20px 0 20px 0;
+  background-color: rgb(233,78,119);
+  color: #fff;
+}
+
+.overflow {
+    /* padding-top:1px; */
+    /* border: 1px solid red; */
+}
+.outer p{
+   overflow: hidden;
+}
+
+.blue, .red-inner {
+    height: 50px;
+    margin: 10px 0;
+    }
+
+.blue {
+    background: blue;
+    }
+
+.red-outer {
+    overflow: hidden;
+    background: red;
+    margin: 10px 0;
+}
+
+.outer {
+        border: 5px solid red;
+        width: 300px;
+        padding: 10px;
+        margin-bottom: 40px;
+    }
+    .float {
+        padding: 10px;
+        border: 5px solid rgba(214,129,137,.4);
+        border-radius: 5px;
+        background-color: rgba(233,78,119,.4);
+        color: #fff;
+        float: left;
+        width: 100px;
+        margin: 0 20px 0 0;
+    }
+
+    .text {
+        overflow: auto;
+    }
+</style>
+<body>
+        <div class="outer">
+                <div class="float">float div</div>
+                <div class="text">
+                 text text text  text text text text text text text text text text  text text text text text text text text text text  text text text text text text text text text
+                </div>
+            </div>
+
+
+        <h2>no BFC</h2>
+        <div class="outer">
+          <p>I am paragraph one and I have a margin top and bottom of 20px;</p>
+          <p>I am paragraph two and I have a margin top and bottom of 20px;</p>
+        </div>
+        
+        <h2>With a BFC</h2>
+        
+        <div class="outer overflow">
+          
+          <p>I am paragraph one and I have a margin top and bottom of 20px;</p>
+          <p>I am paragraph two and I have a margin top and bottom of 20px;</p>
+        </div>
+
+
+        <div class="blue"></div>
+        <div class="red-outer">
+        <div class="red-inner">red inner</div>
+        </div>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>pjax</title>
+    <meta charset="utf-8">
+</head>
+<body>
+  <h1>My Site</h1>
+  <div>
+    Go to <a href="res1.text">第一页</a>.<a href="res2.text">第二页</a>
+  </div>
+  <div id="container"></div>    
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+<script src="https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.js"></script>
+<script type="text/javascript">
+$(document).pjax('a', '#container')
+</script>
+</html>

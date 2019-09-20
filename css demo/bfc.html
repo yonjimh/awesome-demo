@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    .left{
+        background: #73DE80;    /* 绿色 */
+        opacity: 0.5;
+        border: 3px solid #F31264;
+        width: 200px;
+        height: 200px;
+        float: left;
+    }
+    .right{                        /* 粉色 */
+        background: #EF5BE2;
+        opacity: 0.5;
+        border: 3px solid #F31264;
+        width:400px;
+        min-height: 100px; overflow: auto;
+    }
+    .box{
+        background:#888;
+        height: 100%;
+        margin-left: 50px;
+
+        /* display: inline-block; */
+    }
+    .little{
+        background: #fff;
+        width: 50px;
+        height: 50px;
+        margin: 10px;
+        /* overflow: auto; */
+        /* float: left; */
+    }
+    /* .blue, .red-inner {
+  height: 50px;
+  margin: 10px 0;
+}
+
+.blue {
+  background: blue;
+}
+
+.red-outer {
+  overflow: hidden;
+  background: red;
+} */
+.tt{
+    height: 10px;
+    background: #73DE80;
+    margin: 10px;
+}
+.right{
+    margin: 10px;
+    /* padding: 20px; */
+    /* overflow: auto; */
+}
+</style>
+<body>
+<div class="tt"></div>
+    <div class='box'>
+        <!-- <div class='left'> </div> -->
+        <div class='right'>
+            <div class='little'></div>
+            <div class='little'></div>
+            <div class='little'></div>
+        </div>
+    </div>
+<style>
+    .sp1{
+        margin: 20px;
+    }
+    .sp2{
+        margin: 20px;
+    }
+</style>
+    <span class="sp1">1111111</span><span class="sp2">2222222</span>
+    <div class="sp1">1111111</div><div class="sp2">2222222</div>
+    
+<!-- 外边距合并 -->
+<!-- <div class="blue"></div>
+<div class="red-outer">
+  <div class="red-inner">red inner</div>
+</div> -->
+</body>
+</html>

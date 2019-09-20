@@ -1,0 +1,233 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+  <title>编辑折线、多边形、圆</title>
+  <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css" />
+
+  <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css" />
+
+  <script
+    src="https://webapi.amap.com/maps?v=1.4.14&key=6275f3babe11c1b6a60aab864caa5b82&plugin=AMap.PolyEditor,AMap.RectangleEditor">
+  </script>
+  <!-- <script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script> -->
+  <script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
+  <script src="http://lib.sinaapp.com/js/jquery/2.2.4/jquery-2.2.4.min.js" type="text/javascript" charset="utf-8">
+  </script>
+</head>
+
+<body>
+  <div id="container"></div>
+  <div class="button-group">
+    <input type="button" class="button" value="地图编辑完成" onClick="closeEditPolygon();" />
+  </div>
+  <script>
+    var editorTool, map = new AMap.Map("container", {
+      resizeEnable: true,
+      center: [116.403322, 39.900255], //地图中心点
+      zoom: 13 //地图显示的缩放级别
+    });
+    var beginNum = 0;
+    var clickListener;
+    var beginPoints;
+    var beginMarks;
+    var polygonEditor;
+    var resPolygon = [];
+    var resNum = 0;
+    var Polygon = []
+    var Rectangle = [] // 矩形
+    init();
+
+    function init() {
+      beginPoints = [];
+      beginMarks = [];
+      beginNum = 0;
+      polygonEditor = '';
+      clickListener = AMap.event.addListener(map, "click", mapOnClick);
+
+      var str =
+        '[{"J":39.91789947393269,"G":116.36744477221691,"lng":116.367445,"lat":39.917899},{"J":39.91184292800211,"G":116.40658356616223,"lng":116.406584,"lat":39.911843},{"J":39.88616249265181,"G":116.37963272998047,"lng":116.379633,"lat":39.886162}]';
+      var arr = json2arr(str);
+      // createPolygon(arr);
+    }
+
+    function mapOnClick(e) {
+
+      beginNum++;
+
+      if (beginNum > 6) {
+        log.info('超出可指定点的数量！')
+        return
+      }
+      // document.getElementById("lnglat").value = e.lnglat.getLng() + ',' + e.lnglat.getLat()
+      beginMarks.push(addMarker(e.lnglat));
+      beginPoints.push(e.lnglat);
+      console.log(beginMarks, 'beginMarks 存储点对象'); // 存储点对象
+
+      console.log(beginPoints, 'beginPoints'); // LngLat点的值 LngLat
+
+      if (beginNum == 2) {
+        Rectangle = createRectangle(beginPoints);
+        clearMarks();
+      }
+      // beginNum++;
+      if (beginNum >= 3) {
+        map.remove(Rectangle);
+        clearMarks();
+        if (beginNum > 3) {
+          //清除前一次的多边形
+          map.remove(Polygon);
+        }
+        // AMap.event.removeListener(clickListener);  
+        Polygon = createPolygon(beginPoints);
+        polygonEditor = createEditor(Polygon);
+        clearMarks();
+      }
+
+    };
+
+    function polygonDragging(e) {
+      // console.log(e);
+      // 获取节点坐标
+
+    }
+
+    function polygonTouchend(e) {
+      console.log(Polygon.getPath());
+      // beginMarks.push(addMarker(e.lnglat));
+      beginPoints = Polygon.getPath();
+    }
+
+    function rectangleTouchend(e) {
+      console.log(Rectangle.getPath());
+      console.log(e);
+      // getPath获取节点的 ，文档没有写但是可以的！！！
+      // beginPoints = Rectangle.getPath();
+      beginPoints = [Rectangle.getBounds().northeast, Rectangle.getBounds().southwest]
+      console.log(Rectangle.getBounds())
+    }
+
+    function createRectangle(arr) {
+      var southWest = new AMap.LngLat(116.356449, 39.859008)
+      var northEast = new AMap.LngLat(116.417901, 39.893797)
+
+      var bounds = new AMap.Bounds(arr[0], arr[1])
+
+      // var rectangle = new AMap.Rectangle({
+      //   bounds: bounds,
+      //   strokeColor: 'red',
+      //   strokeWeight: 6,
+      //   strokeOpacity: 0.5,
+      //   strokeDasharray: [30, 10],
+      //   // strokeStyle还支持 solid
+      //   strokeStyle: 'dashed',
+      //   fillColor: 'blue',
+      //   fillOpacity: 0.5,
+      //   cursor: 'pointer',
+      //   zIndex: 50,
+      // })
+
+      console.log(arr);
+      // console.log(new AMap.LngLat(arr[0].lng, arr[0].lat));
+
+      // AMap.Bounds(southWest: LngLat, northEast: LngLat)
+      var rectangle = new AMap.Rectangle({
+        map: map,
+        bounds: bounds,
+        strokeColor: "#0000ff",
+        strokeOpacity: 1,
+        strokeWeight: 3,
+        fillColor: "#f5deb3",
+        fillOpacity: 0.35,
+        draggable: true
+      });
+      // rectangle.setMap(map)
+      // 缩放地图到合适的视野级别
+      // map.setFitView([rectangle])
+      console.log(rectangle);
+      // rectangle.setMap(map)
+      // rectangle.on('dragging', dragging)
+      rectangle.on('touchend', rectangleTouchend)
+      return rectangle;
+    }
+
+    function createPolygon(arr) {
+      var polygon = new AMap.Polygon({
+        map: map,
+        path: arr,
+        strokeColor: "#0000ff",
+        strokeOpacity: 1,
+        strokeWeight: 3,
+        fillColor: "#f5deb3",
+        fillOpacity: 0.35,
+        draggable: true
+      });
+      polygon.on('dragging', polygonDragging)
+      polygon.on('touchend', polygonTouchend)
+      return polygon;
+    }
+
+    function createEditor(polygon) {
+      var polygonEditor = new AMap.PolyEditor(map, polygon);
+      polygonEditor.open();
+      AMap.event.addListener(polygonEditor, 'end', polygonEnd);
+      return polygonEditor;
+    }
+
+    function closeEditPolygon() {
+      polygonEditor.close();
+    }
+
+    function polygonEnd(res) {
+      resPolygon.push(res.target);
+      alert(resPolygon[resNum].contains([116.386328, 39.913818]));
+      appendHideHtml(resNum, res.target.getPath());
+
+      resNum++;
+      init();
+    }
+
+    function appendHideHtml(index, arr) {
+      var strify = JSON.stringify(arr);
+      var html = '<input type="hidden" id="index' + index + '" name="paths[]" value="' + strify + '">';
+      $('body').append(html);
+      console.log(html);
+    }
+
+
+
+    function clearMarks() {
+      map.remove(beginMarks);
+    }
+
+    function json2arr(json) {
+      var arr = JSON.parse(json);
+      var res = [];
+      for (var i = 0; i < arr.length; i++) {
+        var line = [];
+        line.push(arr[i].lng);
+        line.push(arr[i].lat);
+        res.push(line);
+      };
+      return res;
+    }
+
+
+    // 实例化点标记
+    function addMarker(lnglat) {
+      console.log(lnglat, '添加点的坐标');
+
+      var marker = new AMap.Marker({
+        icon: "http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
+        position: lnglat
+      });
+      marker.setMap(map);
+      return marker;
+    }
+  </script>
+</body>
+
+</html>

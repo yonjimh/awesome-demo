@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="https://unpkg.com/nprogress@0.2.0/nprogress.js
+"></script>
+<link rel="stylesheet" href="https://unpkg.com/nprogress@0.2.0/nprogress.css">
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+<body>
+    <a href="./res1.text">typed.js.html</a>
+    <a href="./typed.js.html">typed.js.html</a>
+
+    11111111111111111111
+    <div id="pjax-container"></div>
+</body>
+<script>
+    // Turbolinks.start()
+window.onload = function(){
+    // NProgress.start();
+    // NProgress.done()
+}
+</script>
+
+<!-- turbolinks 5+ -->
+<!-- <script src="https://cdn.bootcss.com/turbolinks/5.2.0/turbolinks.js"></script>
+<script>
+    window.onload = function(){
+$(document)
+    .on('turbolinks:click', function() {
+        NProgress.start();
+        console.log('turbolinks:click');   
+    })
+    .on('turbolinks:render', function() {
+        console.log('turbolinks:render');   
+        NProgress.done(); // to work with the above method on first visit
+        NProgress.remove(); // to work on back btn click, restore event
+    });
+}
+</script> -->
+
+<!-- pjax -->
+<script src="https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.js"></script>
+<script>
+$(document).pjax('a', '#pjax-container')
+$(document).on('pjax:start', function() { NProgress.start(); });
+$(document).on('pjax:end',   function() { NProgress.done();  });
+</script>
+</html>

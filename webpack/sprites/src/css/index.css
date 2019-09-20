@@ -1,0 +1,20 @@
+.img1 {
+    width: 128px;
+    height: 128px;
+    background-repeat: no-repeat;
+    background-image: url('../img/shime1.png');
+}
+
+.img2 {
+    width: 128px;
+    height: 128px;
+    background-repeat: no-repeat;
+    background-image: url('../img/shime2.png');
+}
+
+.img3 {
+    width: 128px;
+    height: 128px;
+    background-repeat: no-repeat;
+    background-image: url('../img/shime3.png');
+}

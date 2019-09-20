@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 利用了对象的特性 -->
+
+
+<script>
+    
+    var arr = [19,8,47,34,78,95,64,22,50,88];
+    var max = Math.max.apply(false,arr);//找出arr数组中的最大值
+    var bucket = new Array(max);//创建水桶数组，给数组添加“water”字符
+    for(var i = 0;i<arr.length;i++){
+      bucket[arr[i]] = "water";
+    }
+    var arr2 = []; //创建一个空数组。
+    for(var i in bucket){ //遍历让bucket的选项添加到arr2数组中
+      arr2.push(parseInt(i))
+    }
+    console.log(arr2)
+// <!-- 
+//     作者：westlife
+// 链接：https://juejin.im/post/5a34a264f265da431c705f9c
+// 来源：掘金
+// 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。 -->
+</script>
+</body>
+</html>

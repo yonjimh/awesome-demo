@@ -1,0 +1,26 @@
+<!-- miniprogram/custom-tab-bar/index.wxml -->
+<view style="height: 106rpx;"></view>
+<view class="serve-mask" catchtouchmove="preventTouchMove" wx:if="{{showServeMask}}">
+  <view class="content">
+    <view class="serve-column">
+      <view wx:for="111111" class="column-tiem" wx:key="">
+        <image src="../assets/images/increase_knowledge_icon@2x.png"></image>
+        <view>帮我找资金</view>
+      </view>
+    </view>
+    <view class="cancel">
+      <image bindtap="hideMask" src="../assets/images/increase_close_icon@2x.png" mode="scaleToFill" lazy-load="false"></image>
+    </view>
+  </view>
+</view>
+<view class="tab-bar">
+  <view class="tab-bar-border"></view>
+  <view wx:for="{{list}}" wx:key="index" class="tab-bar-item" data-path="{{item.pagePath}}" data-index="{{index}}" bindtap="switchTab">
+    <view wx:if="{{index === 1}}" class="middle">
+      <image src="{{selected1 === index ? item.selectedIconPath : item.iconPath}}"></image>
+    </view>
+    <image wx:else src="{{selected1 === index ? item.selectedIconPath : item.iconPath}}"></image>
+    <image style="visibility: hidden;" wx:if="{{index === 1}}"></image>
+    <view style="color: {{selected1 === index ? selectedColor : color}}">{{item.text}}</view>
+  </view>
+</view>

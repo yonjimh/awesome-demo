@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<body>
+    <div id="test">
+        <div :style="{color: a}">aa</div>
+        <ac></ac>
+        <order></order>
+    </div>
+
+    <script type="text/template" id="img1">
+        <img src="mm1.jpg" alt="111">
+    </script>
+
+    <template  id="b">
+        <div>111111111<div>
+    </template>
+    <script type="module">
+
+        import orderP from './a.js'         //这个 只能在跑服务端，本地直接运行无效 会产生跨域问题。。
+        import  'https://cdn.bootcss.com/jquery/3.4.1/jquery.js'
+        console.log(orderP)
+    </script>
+    <script>
+    new Vue({
+        el: '#test',
+        data: {
+            a: 'red'
+        },
+        components: {
+            ac: {
+                template: '#img1'
+            },
+            order: {
+                template: '#b'
+            }
+        }
+    })
+
+</script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "pages": [
+    "pages/index/index"
+  ],
+  "plugins": {
+    "htmltowxml": {
+      "version": "1.4.0",
+      "provider": "wxa51b9c855ae38f3c"
+    }
+  },
+  "sitemapLocation": "sitemap.json"
+}

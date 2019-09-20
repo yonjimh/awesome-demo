@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    header,
+    footer,
+    main {
+        display: block;
+
+    }
+
+    header {
+        position: fixed;
+        height: 50px;
+        left: 0;
+        right: 0;
+        top: 0;
+    }
+
+    footer {
+        position: absolute;
+        height: 34px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+    main {
+
+        /* main绝对定位，进行内部滚动 */
+        position: absolute;
+        top: 50px;
+        bottom: 34px;
+        /* 使之可以滚动 */
+        overflow-y: scroll;
+        /* 增加该属性，可以增加弹性 */
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* main .content {
+        height: 2000px;
+    } */
+</style>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+
+<body class="layout-fixed">
+
+    <!-- fixed定位的头部 -->
+    <header>
+        <input type="text" placeholder="Footer..." />
+    </header>
+
+    <!-- 可以滚动的区域 -->
+    <main>
+        <!-- 内容在这里... -->
+    </main>
+    <span style="position: absolute;top:100px;"></span>
+    <!-- fixed定位的底部 -->
+    <footer>
+        <!-- <input type="text" placeholder="Footer..."/> -->
+        <button class="submit">提交</button>
+    </footer>
+
+    <script>
+        // navigator.userAgent.indexOf用来判断浏览器类型
+        var isAndroid = navigator.userAgent.indexOf('Android') > -1 || navigator.userAgent.indexOf('Adr') > -1;
+        if (isAndroid) { //如果是安卓手机的浏览器
+
+            // 加了这两行软键盘弹起时body 就可以滚动了，因为加了高度嘛，看需求去掉吧
+            var win_h = $(window).height(); //关键代码
+            $("body").height(win_h); //关键代码
+            
+            window.addEventListener('resize', function () {
+                document.getElementsByTagName('span')[0].innerText = document.activeElement.tagName 
+                // alert('resize')
+                // $("body").height(win_h);//关键代码
+                // Document 对象的activeElement 属性返回文档中当前获得焦点的元素。
+                // 因为判断的是点击目标的时候才实现
+                if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName ===
+                    'TEXTAREA') {
+                    if ($('.submit').is(':visible')) {
+                        $('.submit').hide();
+                    } else {
+                        $('.submit').show();
+                    }
+                }
+
+                // 我去 所以失去焦点时要显示出来啊啊啊
+                if(document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !==
+                    'TEXTAREA') {
+                        $('.submit').show();
+                }
+            });
+        }
+        // 方法一
+        // var win_h = $(window).height(); //关键代码
+        // window.addEventListener('resize', function () {
+        //     if ($(window).height() < win_h) {
+        //         $('.submit').hide();
+        //     } else {
+        //         $('.submit').show();
+        //     }
+        // });
+
+        // 方法三 这个不行
+        // var oHeight = $(window).height(); //浏览器当前的高度
+        // $(window).resize(function () {
+        //     if ($(window).height() < oHeight) {
+        //         $(".submit").css("position", "static");
+        //     } else {
+        //         $(".submit").css("position", "absolute");
+        //     }
+        // });
+        // $('.submit').on('blur',()=>{
+        //     $('.submit').show();
+        // })
+        // var win_h = $(window).height(); //关键代码
+        // window.addEventListener('resize', function () {
+        //     if ($(window).height() < win_h) {
+        //         $('.submit').hide();
+        //     } else {
+        //         $('.submit').show();
+        //     }
+        // });
+
+        // 兼容Android 键盘弹起时，把确认订单弹窗顶上去影响布局
+        // const h = document.body.scrollHeight // 用onresize事件监控窗口或框架被调整大小，先把一开始的高度记录下来
+        // window.onresize = function () { // 如果当前窗口小于一开始记录的窗口高度，那就让当前窗口等于一开始窗口的高度
+        //         if (document.body.scrollHeight < h) {
+        //             document.body.style.height = h
+        //         }
+        //     }
+    </script>
+</body>
+
+</html>

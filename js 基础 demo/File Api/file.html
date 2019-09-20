@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+        <style type="text/css">
+            *{
+                margin: 0px;
+                padding: 0px;
+            }
+            .filePicker{
+                width: 160px;
+                height: 44px;
+                line-height: 44px;
+                text-align: center;
+                color: #fff;
+                background: #00b7ee;        
+            }
+
+            /* 自定义上传btn格式 */
+
+            /* .filePicker input[type="file"] {
+                position: relative;
+                top: -44px;
+                left: 0px;
+                width: 160px;
+                height: 44px;
+                opacity: 0;
+                cursor: pointer;
+                overflow: hidden;
+                z-index: 0;
+            } */
+
+           /*去掉默认格式*/
+            input {  
+                background:none;  
+                outline: none;  
+                border:0px;
+            }
+            .container{
+                width: 160px;
+                margin: 30px auto;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <input type="input" name="" id="" value="" />
+        </div>    
+        <div class="container">
+            <div class="filePicker">
+                <label>上传</label>
+                <input id="fileInput" type="file" name="file" multiple="multiple" accept="image/*">
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var objArr = [52, 4, 34, 315, 22, 654, 7, 48, 8, 6, 23, 42, 34, 43, 2, 34, 435, 634, 6]
+
+        //排序的趟数  length - 1 作比较 n - 1 次就好了 
+        for (let i = 0; i < objArr.length - 1; i++) {
+            var tempExchangVal;
+            //是当前趟数需要比较的次数 每一轮比较完 都会讲一个最大的值放到数组后面 所以减去n轮 （ objArr.length - i）
+            for (let j = 0; j < objArr.length - i - 1; j++) {
+                console.log(j, 'j')
+                if (objArr[j] > objArr[j + 1]) {
+                    tempExchangVal = objArr[j]
+                    objArr[j] = objArr[j + 1]
+                    objArr[j + 1] = tempExchangVal
+                }
+            }
+        }
+        console.log(objArr)
+        // for (var i = 0; i < objArr.length; i++) {
+        //     console.log(i)
+        // }
+
+        function sort(list) {
+            list = [...list];
+            let length = list.length;
+            while (length--) {
+                for (let i = 0; i < length; i++) {
+                    const current = list[i];
+                    const next = list[i + 1];
+                    if (current > next) {
+                        [list[i], list[i + 1]] = [next, current];
+                    }
+                }
+            }
+            return list;
+        }
+    </script>
+</body>
+
+</html>

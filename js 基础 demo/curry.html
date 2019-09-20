@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    //  function add(num1, num2, num3){
+    //         return num1 + num2 + num3;
+    //     }
+    //     function curry(fn){
+    //         var args = Array.prototype.slice.call(arguments, 1);
+    //         var argLength = fn.length
+    //         return function(){
+    //             var innerArgs = Array.prototype.slice.call(arguments);
+    //             var finalArgs = args.concat(innerArgs);
+    //             var fnArgsArr = finalArgs.slice() 
+    //             fnArgsArr.unshift(fn)
+    //             if(finalArgs.length < argLength){
+    //                 // return curry.call(this, fn, ...finalArgs);
+    //                 return curry.apply(this, fnArgsArr);
+    //             } else {
+    //                 return fn.apply(null, finalArgs);
+    //             };
+    //         }
+    //     }
+    //     var curriedAdd = curry(add,6);   
+    //     console.log(curriedAdd(1)(1));  // 8
+    //     curriedAdd = curry(add);
+    //     console.log(curriedAdd(2,7)(6));  // 15
+
+   
+        function curry(fn){
+            var args = Array.prototype.slice.call(arguments, 1);
+            var finalArgs = []
+            return function() {
+                var innerArgs = Array.prototype.slice.call(arguments);
+                finalArgs = args.concat(innerArgs);
+                if (arguments.length === 0) {
+                    return fn.apply(null, finalArgs);  // 没有参数的时候执行函数
+                }else {
+                    var fnArgsArr = finalArgs.slice() 
+                    fnArgsArr.unshift(fn)
+                    return curry.apply(this, fnArgsArr);
+                }
+            }
+        }
+        function add(){
+            var i=0; len = arguments.length;
+            var num = 0
+            for (i; i<len; i+=1) {
+                num += arguments[i];
+            }
+            return num
+        }
+        var curriedAdd = curry(add,6);   
+        console.log(curriedAdd(1)(1)(1,2,3,4,5)());
+        console.log(curriedAdd(1)());
+        curriedAdd = curry(add);
+        console.log(curriedAdd(2,7)(6)(3)());
+    </script>
+</body>
+</html>

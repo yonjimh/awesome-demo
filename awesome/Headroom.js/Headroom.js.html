@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <title>Headroom.js</title>
+    <meta name="viewport" content="width=device-width">
+    <!-- <link rel="stylesheet" href="headroom.css" type="text/css"> -->
+    <!--<link href="//cdn.bootcss.com/normalize/2.1.0/normalize.css" rel="stylesheet">-->
+    <script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/headroom/0.9.4/headroom.js"></script>
+    <!--<script src="//cdn.bootcss.com/headroom/0.7.0/jQuery.headroom.js"></script>-->
+</head>
+<style>
+*{
+    margin: 0;
+    padding: 0;
+}
+.header {
+    background-color: #292f36;
+    height:46px;
+    line-height: 46px;
+    color: #FFFFFF;
+    padding: 0 1.5em;
+    text-align: center;
+}
+
+.header--fixed {
+    position: fixed;
+    z-index: 10;
+    right: 0;
+    left: 0;
+    top: 0
+}
+
+.animated {
+    -webkit-animation-duration: .5s;   /*表示动画执行的时间*/
+    -webkit-animation-fill-mode: both; /*规定动画在播放前和之后其动画效果是否可见*/
+    animation-fill-mode: both
+}
+
+@-webkit-keyframes slideDown {       /*表示匀速地执行动画*/
+    0% {
+        -webkit-transform: translateY(-46px);
+    }
+
+    100% {
+        -webkit-transform: translateY(0);
+    }
+}
+
+.animated.slideDown {
+    -webkit-animation-name: slideDown;   /*规定需要绑定到选择器的 keyframe 名称。。*/
+    animation-name: slideDown
+}
+
+@-webkit-keyframes slideUp {
+    0% {
+        -webkit-transform: translateY(0);
+    }
+
+    100% {
+        -webkit-transform: translateY(-46px);
+    }
+}
+
+.animated.slideUp {
+    -webkit-animation-name: slideUp;
+    animation-name: slideUp
+}
+
+.back-to-top {
+    cursor: pointer;
+    position: fixed;
+    right: 50px;
+    top: -900px;
+    z-index: 2;
+    width: 70px;
+    height: 900px;
+    background: url('./scroll.png');
+    transition: all .5s ease-in-out;
+    opacity: 1;
+}
+</style>
+<body>
+        <header id="header" class="header header--fixed">
+            Headroom.js
+        </header>
+        <div class="back-to-top"></div>
+        <!--测试增加页面/start-->
+        <div style="height:1000px;background: #FF0000;color:#FFFFFF;padding-top:46px;text-align: center;font-size: 60px;">红
+        </div>
+        <div style="height:1000px;background: #00FF00;color:#FFFFFF;text-align: center;font-size: 60px;">绿</div>
+        <div style="height:1000px;background: #0000FF;color:#FFFFFF;text-align: center;font-size: 60px;">蓝</div>
+        <!--测试增加页面/end-->
+        <script>
+            var header = document.querySelector("header");
+            var headroom = new Headroom(header, {
+                tolerance: 5,
+                offset: 205,
+                classes: {
+                    initial: "animated",
+                    pinned: "slideDown",
+                    unpinned: "slideUp"
+                }
+            });
+            headroom.init();
+
+            //jquery的使用方式
+            // $(function() {
+            //     $("#header").headroom({
+            //         tolerance: 5,
+            //         offset: 205,
+            //         classes: {
+            //             initial: "animated",
+            //             pinned: "slideDown",
+            //             unpinned: "slideUp"
+            //         }
+            //     });
+            // })
+        </script>
+        <script>
+        // const Headroom = require('headroom.js');
+        hasMobileUA= function () {
+          var nav = window.navigator;
+          var ua = nav.userAgent;
+          var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+
+          return pa.test(ua);
+        }
+
+        isMobile = function () {
+          return window.screen.width < 767 && this.hasMobileUA();
+        }
+        if (!isMobile()) {
+        //   var headroom = new Headroom($('.site-nav')[0], {
+        //     "tolerance": 5,
+        //     "offset": 205,
+        //     "classes": {
+        //       "initial": "head-animated",
+        //       "pinned": "slideDown",
+        //       "unpinned": "slideUp"
+        //     }
+        //   });
+        //   headroom.init();
+
+          // 利用 data-scroll 属性，滚动到任意 dom 元素
+          $.scrollto = function (scrolldom, scrolltime) {
+            $(scrolldom).click(function () {
+              // 回到顶部
+              $(this).addClass("active").siblings().removeClass("active");
+              $('html, body').animate({
+                scrollTop: $('body').offset().top
+              }, scrolltime);
+              return false;
+            });
+          };
+          // 判断位置控制 返回顶部的显隐
+          var backTo = $(".back-to-top");
+          var backHeight = $(window).height() - 980 + 'px';
+          $(window).scroll(function () {
+            if ($(window).scrollTop() > 700 && backTo.css('top') === '-900px') {
+              backTo.css('top', backHeight);
+            }
+            else if ($(window).scrollTop() <= 700 && backTo.css('top') !== '-900px') {
+              backTo.css('top', '-900px');
+            }
+          });
+
+          // 启用
+          $.scrollto(".back-to-top", 800);
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+div{
+    width: 100px;
+    height: 100px;
+    background: red;
+}
+</style>
+<body>
+    <div id="myBtn"></div>
+    <script>
+    // createEvent
+    // var btn = document.getElementById("myBtn");
+    // //创建事件对象
+    // var event = document.createEvent("MouseEvents");
+    // //初始化事件对象
+    // event.initMouseEvent("click"); // 这里设置的name就是监听时的name
+    // btn.addEventListener('click',function(e){
+    //     console.log(e)
+    //     console.log('btn onclick');
+    // })
+    // //触发事件
+    // btn.dispatchEvent(event); // 触发事件，该事件就跻身“官方事件”之列了，因而能够照样冒泡并引发相应事件处理程序的执行。
+    // btn.click(); 
+
+
+
+    // CustomEvent
+    var event = new CustomEvent('custom', {
+        detail: 'custom event'
+    });
+
+    // 监听事件
+    document.addEventListener('custom', function (e) {
+        console.log(e, e.type, e.detail)
+    }, false);
+
+    // 触发事件
+    document.dispatchEvent(event);
+
+    var btn = document.getElementById("myBtn");
+    // 创建事件对象
+    var event = new MouseEvent("click", {
+        bubbles: true,
+        cancelable: true,
+        view: document.defaultView, // 就是window， document.defaultView 在浏览器中，该属性返回当前 document 对象所关联的 window 对象
+        detail: 0,
+        screenX: 0,
+        screenY: 0,
+        clientX: 0,
+        clientY: 0,
+        ctrlKey: false,
+        altKey: false,
+        shiftKey: false,
+        metaKey: false,
+        button: 0,
+        relatedTarget: null
+    });
+
+    btn.addEventListener('click',function(e){
+        console.log(e)
+        console.log('btn onclick');
+    })
+    btn.dispatchEvent(event);
+    </script>
+</body>
+</html>
